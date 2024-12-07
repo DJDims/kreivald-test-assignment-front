@@ -1,0 +1,47 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+	<ng-container matColumnDef="photo">
+		<th mat-header-cell *matHeaderCellDef> Photo </th>
+		<td mat-cell *matCellDef="let element"><img [src]="element.photo" alt=""></td>
+	</ng-container>
+
+	<ng-container matColumnDef="name">
+		<th mat-header-cell *matHeaderCellDef> Name </th>
+		<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+	</ng-container>
+
+	<ng-container matColumnDef="email">
+		<th mat-header-cell *matHeaderCellDef> Email </th>
+		<td mat-cell *matCellDef="let element"> {{element.email}} </td>
+	</ng-container>
+
+	<ng-container matColumnDef="phone">
+		<th mat-header-cell *matHeaderCellDef> Phone </th>
+		<td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+	</ng-container>
+
+	<ng-container matColumnDef="position">
+		<th mat-header-cell *matHeaderCellDef> Position </th>
+		<td mat-cell *matCellDef="let element"> {{element.position}} </td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="buttons">
+	<button
+		mat-raised-button
+		disabledInteractive
+		(click)="fetchPage(links.prev_url)"
+		
+		[ngClass]="{'disable':!links.prev_url}"
+	>Previous</button>
+	<p>{{data.page}}</p>
+  	<button
+		mat-raised-button
+		disabledInteractive
+		(click)="fetchPage(links.next_url)"
+		[ngClass]="{'disable':!links.next_url}"
+	>Next</button>
+</div>

@@ -1,0 +1,39 @@
+<form>
+	<mat-form-field appearance="fill">
+		<mat-label>Name</mat-label>
+		<input matInput placeholder="Placeholder" name="name" [(ngModel)]="user.name">
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Email</mat-label>
+		<input matInput placeholder="Placeholder" name="email" [(ngModel)]="user.email">
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Phone</mat-label>
+		<input matInput placeholder="Placeholder" name="phone" [(ngModel)]="user.phone">
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Position</mat-label>
+		<mat-select name="position_id" [(ngModel)]="user.position_id">
+			@for(pos of positions; track pos) {
+				<mat-option value={{pos.id}}>{{pos.name}}</mat-option>
+			}
+		</mat-select>
+	</mat-form-field>
+	<div class="file_input">
+		<button mat-raised-button (click)="file_input.click()">Upload photo</button>
+		<input type="file" style="display: none;" #file_input (change)="setImg($event)">
+	</div>
+	<mat-form-field>
+		<mat-label>Token</mat-label>
+		<textarea matInput>{{this.token}}</textarea>
+	</mat-form-field>
+	<button
+		mat-raised-button
+		(click)="getToken()"
+		type="button"
+	>Get token</button>
+	<button
+		mat-raised-button
+		(click)="addUser()"
+	>Add</button>
+</form>
