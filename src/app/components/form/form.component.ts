@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { IPosition, IUser } from '@interfaces';
 import { RequestsService } from 'app/services/service';
+import { env } from 'env';
 
 @Component({
   selector: 'app-form',
@@ -34,7 +35,7 @@ export class FormComponent {
 	};
 
     ngOnInit() {
-        this.req.Get<IPosition[]>('http://localhost:8000/api/positions').subscribe(data => {
+        this.req.Get<IPosition[]>(`${env.apiUrl}/positions`).subscribe(data => {
             this.positions = data;
         });
     };
@@ -48,7 +49,7 @@ export class FormComponent {
 		formData.append('email', this.user.email);
 		formData.append('phone', this.user.phone);
 		formData.append('position_id', String(this.user.position_id));
-		this.req.Post('http://localhost:8000/api/users', formData, [{key:'token', value:this.token}]).subscribe(data => {
+		this.req.Post(`${env.apiUrl}/api/users`, formData, [{key:'token', value:this.token}]).subscribe(data => {
             this.user.name = "";
             this.user.email = "";
             this.user.phone = "";
@@ -67,7 +68,7 @@ export class FormComponent {
 	}
 
 	getToken() {
-		this.req.Get<{token:string}>('http://localhost:8000/api/token').subscribe(data => {
+		this.req.Get<{token:string}>(`${env.apiUrl}/api/token`).subscribe(data => {
             this.token = data.token;
         });
 	}

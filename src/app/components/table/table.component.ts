@@ -4,6 +4,7 @@ import { ILinks, IPagination, IUser } from '@interfaces';
 import { RequestsService } from 'app/services/service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { env } from 'env';
 
 @Component({
   selector: 'app-table',
@@ -20,7 +21,7 @@ export class TableComponent {
 	links!: ILinks;
 
 	fetchPage(url?: string) {
-		this.req.Get<IPagination>(url ? url : `http://localhost:8000/api/users`).subscribe(data => {
+		this.req.Get<IPagination>(url ? url : `${env.apiUrl}/users`).subscribe(data => {
 			this.dataSource = data.users;
             this.links = data.links;
 			this.data = data;
